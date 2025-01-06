@@ -26,6 +26,7 @@ step "blueprint" {
             Octopus.Action.ProcessTemplate.Reference.VersioningOption = "AlwaysUseLatest"
             Octopus.Action.RunOnServer = "false"
             "Octopus.Step[Apply a Terraform template].Action[Apply a Terraform template].Properties[Octopus.Action.Terraform.TemplateParameters]" = "{}"
+            "Octopus.Step[Apply a Terraform template].Action[Apply a Terraform template].WorkerPoolId" = "WorkerPools-562"
             "Octopus.Step[Manual Intervention Required].Action[Manual Intervention Required].Properties[Octopus.Action.Manual.Instructions]" = <<-EOT
                 ## Please review the changes
                 Terraform has planned that there are changes to be applied. Please review them.
@@ -38,6 +39,8 @@ step "blueprint" {
             "Octopus.Step[Plan to apply a Terraform template].Action[Plan to apply a Terraform template].Properties[Octopus.Action.Terraform.ManagedAccount]" = "AWS"
             "Octopus.Step[Plan to apply a Terraform template].Action[Plan to apply a Terraform template].Properties[Octopus.Action.Terraform.TemplateParameters]" = "{}"
             "Octopus.Step[Plan to apply a Terraform template].Action[Plan to apply a Terraform template].WorkerPoolId" = "WorkerPools-563"
+            "Octopus.Step[Run a Script].Action[Run a Script].Container" = "{\"FeedId\":null,\"Image\":null,\"GitUrl\":null,\"Dockerfile\":null}"
+            "Octopus.Step[Run a Script].Action[Run a Script].WorkerPoolId" = "WorkerPools-563"
         }
         worker_pool_variable = ""
     }
