@@ -1,5 +1,5 @@
 variable "Greeting" {
     value "Hello, test" {
-        environment = ["development"]
+        environment = ["development", "staging", "development-environment"]
     }
 }
