@@ -3,3 +3,11 @@ variable "Greeting" {
         environment = ["development", "staging", "development-environment"]
     }
 }
+
+variable "abc" {
+    type = "AzureAccount"
+
+    value "aaaa" {
+        environment = ["staging", "development", "production", "production-environment", "development-environment"]
+    }
+}
