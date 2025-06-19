@@ -11,3 +11,11 @@ variable "abc" {
         environment = ["staging", "development", "production", "production-environment", "development-environment"]
     }
 }
+
+variable "certificate_variable" {
+    type = "Certificate"
+
+    value "Certificates-189" {
+        environment = ["development", "staging", "production"]
+    }
+}
