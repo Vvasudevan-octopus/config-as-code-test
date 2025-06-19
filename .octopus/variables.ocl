@@ -19,3 +19,11 @@ variable "certificate_variable" {
         environment = ["development", "staging", "production"]
     }
 }
+
+variable "worker_pool" {
+    type = "WorkerPool"
+
+    value "hosted-ubuntu" {
+        environment = ["development", "staging", "production"]
+    }
+}
