@@ -16,3 +16,22 @@ step "run-a-script" {
         worker_pool_variable = ""
     }
 }
+
+step "net-core-check-net-core-framework-version" {
+    name = ".NET Core - Check .NET Core Framework Version"
+    properties = {
+        Octopus.Action.TargetRoles = "new"
+    }
+
+    action {
+        properties = {
+            CheckASPdotNETCore = "false"
+            Exact = "false"
+            Octopus.Action.RunOnServer = "false"
+            Octopus.Action.Template.Id = "ActionTemplates-681"
+            Octopus.Action.Template.Version = "5"
+            TargetVersion = "2.0.5"
+        }
+        worker_pool_variable = ""
+    }
+}
