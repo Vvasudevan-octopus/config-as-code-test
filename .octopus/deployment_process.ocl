@@ -29,4 +29,8 @@ process_template "process-template" {
     parameter "Worker_pool" {
         value = "WorkerPools-822"
     }
+
+    parameter "a" {
+        value = "a"
+    }
 }
