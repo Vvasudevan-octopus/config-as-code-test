@@ -27,3 +27,7 @@ variable "worker_pool" {
         environment = ["development", "staging", "production"]
     }
 }
+
+variable "new_venk_variable" {
+    value "123" {}
+}
