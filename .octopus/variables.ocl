@@ -31,3 +31,9 @@ variable "worker_pool" {
 variable "new_venk_variable" {
     value "123" {}
 }
+
+variable "New-Account" {
+    type = "AzureAccount"
+
+    value "aaaa" {}
+}
