@@ -8,7 +8,11 @@ step "run-a-script" {
         action_type = "Octopus.Script"
         properties = {
             Octopus.Action.RunOnServer = "false"
-            Octopus.Action.Script.ScriptBody = "echo \"Hello World\""
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                echo "Hello World"
+                
+                $OctopusParameters["Octopus.Account.Name"]
+                EOT
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Script.Syntax = "PowerShell"
             OctopusUseBundledTooling = "False"
@@ -18,6 +22,7 @@ step "run-a-script" {
 }
 
 process_template "process-template" {
+    is_disabled = true
     name = "Process Template"
     process_template_slug = "example-blueprint"
     version_mask = "X"
@@ -28,5 +33,36 @@ process_template "process-template" {
 
     parameter "a" {
         value = "a"
+    }
+}
+
+step "plan-to-apply-a-terraform-template" {
+    name = "Plan to apply a Terraform template"
+
+    action {
+        action_type = "Octopus.TerraformPlan"
+        properties = {
+            Octopus.Action.AzureAccount.Variable = "$OctopusParameters[\"New-Account\"]"
+            Octopus.Action.GoogleCloud.ImpersonateServiceAccount = "False"
+            Octopus.Action.GoogleCloud.UseVMServiceAccount = "True"
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Terraform.AllowPluginDownloads = "True"
+            Octopus.Action.Terraform.AzureAccount = "True"
+            Octopus.Action.Terraform.GoogleCloudAccount = "False"
+            Octopus.Action.Terraform.ManagedAccount = "None"
+            Octopus.Action.Terraform.PlanJsonOutput = "False"
+            Octopus.Action.Terraform.RunAutomaticFileSubstitution = "True"
+            Octopus.Action.Terraform.Template = <<-EOT
+                resource "null_resource" "hello_world" {
+                  provisioner "local-exec" {
+                    command = "echo 'Hello World!'"
+                  }
+                }
+                
+                EOT
+            Octopus.Action.Terraform.TemplateParameters = "{}"
+        }
+        worker_pool = "hosted-windows"
+        worker_pool_variable = ""
     }
 }
